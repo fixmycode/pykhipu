@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Receivers():
     ENDPOINT = '/receivers'
 
@@ -10,5 +11,5 @@ class Receivers():
         de la cuenta de usuario asociada, datos de facturación y datos de
         contacto.
         """
-        response = self.client.make_request('POST', ENDPOINT, data=data)
+        response = self.client.make_request('POST', self.ENDPOINT, data=data)
         return ReceiversCreateResponse.from_response(response)

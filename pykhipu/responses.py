@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from .errors import ValidationError, AuthorizationError, ServiceError
 
@@ -9,11 +10,13 @@ class BaseResponse():
         try:
             response.raise_for_status()
             return cls.from_data(data)
-        except requests.exceptions.HttpError as e:
+        except requests.exceptions.HTTPError as e:
             if response.status_code == requests.codes.bad_request:
                 raise ValidationError.from_data(data)
             if response.status_code == requests.codes.forbidden:
-                raise AuthorizationError.from_data(data)
+                err = AuthorizationError.from_data(data)
+                print err
+                raise err
             if response.status_code == requests.codes.service_unavailable:
                 raise ServiceError.from_data(data)
 
@@ -216,7 +219,8 @@ class PaymentsResponse(BaseResponse):
         """
         return self._receipt_url
 
-    @propertydef return_url(self):
+    @property
+    def return_url(self):
         """
         URL donde se redirige al pagador luego que termina el pago
         """
@@ -447,7 +451,7 @@ class BanksResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        banks = [BankItem.from_data(i) from i in data.get('banks')]
+        banks = [BankItem.from_data(i) for i in data.get('banks')]
         return cls(banks)
 
     @property

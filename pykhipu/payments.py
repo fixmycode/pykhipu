@@ -1,4 +1,4 @@
-from .client import Client
+# -*- coding: utf-8 -*-
 from .responses import PaymentsResponse, PaymentsCreateResponse
 
 
@@ -14,7 +14,7 @@ class Payments():
         actual del pago. Se obtiene del notification_token que envia khipu
         cuando el pago es conciliado.
         """
-        response = self.client.make_request('GET', ENDPOINT,
+        response = self.client.make_request('GET', self.ENDPOINT,
             params={ 'notification_token': notification_token })
         return PaymentsResponse.from_response(response)
 
@@ -27,7 +27,7 @@ class Payments():
                 'currency': currency,
                 'amount': amount }
         data.update(kwargs)
-        response = self.client.make_request('POST', ENDPOINT, data=data)
+        response = self.client.make_request('POST', self.ENDPOINT, data=data)
         return PaymentsCreateResponse.from_response(response)
 
     def get_id(self, id):
@@ -35,7 +35,7 @@ class Payments():
         Información completa del pago. Datos con los que fue creado y el estado
         actual del pago.
         """
-        endpoint = "{}/{}/".format(ENDPOINT, id)
+        endpoint = "{}/{}/".format(self.ENDPOINT, id)
         response = self.client.make_request('GET', endpoint)
         return PaymentsResponse.from_response(response)
 
@@ -44,7 +44,7 @@ class Payments():
         Solo se pueden borrar pagos que estén pendientes de pagar. Esta
         operación no puede deshacerse.
         """
-        endpoint = "{}/{}/".format(ENDPOINT, id)
+        endpoint = "{}/{}/".format(self.ENDPOINT, id)
         response = self.client.make_request('DELETE', endpoint)
         return SuccessResponse.from_response(response)
 
@@ -57,6 +57,6 @@ class Payments():
         data = None
         if amount:
             data = { 'amount': amount }
-        endpoint = "{}/{}/refunds".format(ENDPOINT, id)
+        endpoint = "{}/{}/refunds".format(self.ENDPOINT, id)
         response = self.client.make_request('POST', endpoint, data=data)
         return SuccessResponse.from_response(response)

@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 import requests
-from .client import Client
 from .responses import BanksResponse
 
 
@@ -10,5 +10,5 @@ class Banks():
         self.client = client
 
     def get(self):
-        response = self.client.make_request('GET', ENDPOINT)
+        response = self.client.make_request('GET', self.ENDPOINT)
         return BanksResponse.from_response(response.json())
