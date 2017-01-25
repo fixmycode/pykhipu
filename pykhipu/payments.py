@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from .responses import PaymentsResponse, PaymentsCreateResponse
 
 
-class Payments():
+class Payments(object):
     ENDPOINT = '/payments'
 
     def __init__(self, client):
@@ -27,6 +28,9 @@ class Payments():
                 'currency': currency,
                 'amount': amount }
         data.update(kwargs)
+        if hasattr(data, 'expires_date'):
+            if isinstance(data['expires_date'], datetime):
+                data['expires_date'] = data['expires_date'].isoformat()
         response = self.client.make_request('POST', self.ENDPOINT, data=data)
         return PaymentsCreateResponse.from_response(response)
 
@@ -35,7 +39,7 @@ class Payments():
         Información completa del pago. Datos con los que fue creado y el estado
         actual del pago.
         """
-        endpoint = "{}/{}/".format(self.ENDPOINT, id)
+        endpoint = "{0}/{1}/".format(self.ENDPOINT, id)
         response = self.client.make_request('GET', endpoint)
         return PaymentsResponse.from_response(response)
 
@@ -44,7 +48,7 @@ class Payments():
         Solo se pueden borrar pagos que estén pendientes de pagar. Esta
         operación no puede deshacerse.
         """
-        endpoint = "{}/{}/".format(self.ENDPOINT, id)
+        endpoint = "{0}/{1}/".format(self.ENDPOINT, id)
         response = self.client.make_request('DELETE', endpoint)
         return SuccessResponse.from_response(response)
 
@@ -57,6 +61,6 @@ class Payments():
         data = None
         if amount:
             data = { 'amount': amount }
-        endpoint = "{}/{}/refunds".format(self.ENDPOINT, id)
+        endpoint = "{0}/{1}/refunds".format(self.ENDPOINT, id)
         response = self.client.make_request('POST', endpoint, data=data)
         return SuccessResponse.from_response(response)

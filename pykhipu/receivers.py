@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-class Receivers():
+class Receivers(object):
     ENDPOINT = '/receivers'
 
     def __init__(self, client):

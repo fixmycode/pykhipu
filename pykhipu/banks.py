@@ -3,7 +3,7 @@ import requests
 from .responses import BanksResponse
 
 
-class Banks():
+class Banks(object):
     ENDPOINT = '/banks'
 
     def __init__(self, client):
@@ -11,4 +11,4 @@ class Banks():
 
     def get(self):
         response = self.client.make_request('GET', self.ENDPOINT)
-        return BanksResponse.from_response(response.json())
+        return BanksResponse.from_response(response)

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import requests
+import dateutil.parser
 from .errors import ValidationError, AuthorizationError, ServiceError
 
 
-class BaseResponse():
+class BaseResponse(object):
     @classmethod
     def from_response(cls, response):
         data = response.json()
@@ -69,17 +70,20 @@ class PaymentsResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
+        conciliation_date = dateutil.parser.parse(data.get('conciliation_date'))
+        expires_date = dateutil.parser.parse(data.get('expires_date'))
+
         return cls(data.get('payment_id'), data.get('payment_url'),
             data.get('simplified_transfer_url'), data.get('transfer_url'),
             data.get('app_url'), data.get('ready_for_terminal'),
             data.get('notification_token'), data.get('receiver_id'),
-            data.get('conciliation_date'), data.get('subject'),
+            conciliation_date, data.get('subject'),
             data.get('amount'), data.get('currency'), data.get('status'),
             data.get('status_detail'), data.get('body'),
             data.get('picture_url'), data.get('receipt_url'),
             data.get('return_url'), data.get('cancel_url'),
             data.get('notify_url'), data.get('notify_api_version'),
-            data.get('expires_date'), data.get('attachment_urls'),
+            expires_date, data.get('attachment_urls'),
             data.get('bank'), data.get('bank_id'), data.get('payer_name'),
             data.get('payer_email'), data.get('personal_identifier'),
             data.get('bank_account_number'),

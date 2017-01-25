@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import six
 from .items import ErrorItem
 
 
+@six.python_2_unicode_compatible
 class BaseError(Exception):
     def __init__(self, status, message):
         self._status = status
@@ -27,8 +29,7 @@ class BaseError(Exception):
 
     def __str__(self):
         return u'{status} {message}'\
-            .format(status = self._status, message = self._message)\
-            .encode('utf-8')
+            .format(status = self._status, message = self._message)
 
 
 class AuthorizationError(BaseError):

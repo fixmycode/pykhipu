@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-class BankItem():
+class BankItem(object):
     def __init__(self, bank_id, name, message, min_amount, bank_type, parent):
         self._bank_id = bank_id
         self._name = name
@@ -61,7 +61,7 @@ class BankItem():
         return self._parent
 
 
-class ErrorItem():
+class ErrorItem(object):
     def __init__(self, field, message):
         self._field = field
         self._message = message
