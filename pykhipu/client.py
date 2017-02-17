@@ -47,12 +47,17 @@ class Client(object):
     def __make_signature(self, method, url, params=None, data=None):
         method_name = method.upper()
         to_sign = '&'.join([method_name, quote(url, safe='')])
+
+        def quote_items(tuples):
+            return ['='.join([quote(str(pair[0]), safe=''),
+                quote(str(pair[1]), safe='')]) for pair in tuples]
+
         if params:
             sorted_items = sorted(params.items(), key = lambda item: item[0])
-            to_sign = '&'.join([to_sign, urlencode(sorted_items)])
+            to_sign = '&'.join([to_sign,] + quote_items(sorted_items))
         if data:
             sorted_items = sorted(data.items(), key = lambda item: item[0])
-            to_sign = '&'.join([to_sign, urlencode(sorted_items)])
+            to_sign = '&'.join([to_sign,] + quote_items(sorted_items))
 
         hasher = hmac.new(self.secret, to_sign, digestmod=sha256)
         signature = "{id}:{hash}".format(id=self.receiver_id,
@@ -71,7 +76,7 @@ class Client(object):
             'headers': {
                 'Authorization': signature,
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'User-Agent': 'pykhipu/0.1.0',
+                'User-Agent': 'pykhipu/0.1.3',
                 'Accept': 'application/json'
             }
         }
