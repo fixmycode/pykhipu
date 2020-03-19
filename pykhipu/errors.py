@@ -42,6 +42,7 @@ class ServiceError(BaseError):
 
 class ValidationError(BaseError):
     def __init__(self, status, message, errors=[]):
+        super().__init__(status, message)
         self._errors = errors
 
     @classmethod

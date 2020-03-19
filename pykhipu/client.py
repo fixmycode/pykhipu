@@ -2,7 +2,7 @@
 import requests
 import hmac
 from hashlib import sha256
-from urllib import urlencode, quote
+from urllib.parse import urlencode, quote
 from .payments import Payments
 from .banks import Banks
 from .receivers import Receivers
