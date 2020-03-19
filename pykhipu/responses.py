@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import dateutil.parser
+from .items import BankItem
 from .errors import ValidationError, AuthorizationError, ServiceError
 
 
@@ -16,7 +17,6 @@ class BaseResponse(object):
                 raise ValidationError.from_data(data)
             if response.status_code == requests.codes.forbidden:
                 err = AuthorizationError.from_data(data)
-                print err
                 raise err
             if response.status_code == requests.codes.service_unavailable:
                 raise ServiceError.from_data(data)
