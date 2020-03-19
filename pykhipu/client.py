@@ -60,7 +60,7 @@ class Client(object):
             sorted_items = sorted(data.items(), key = lambda item: item[0])
             to_sign = '&'.join([to_sign,] + quote_items(sorted_items))
 
-        hasher = hmac.new(self.secret, to_sign, digestmod=sha256)
+        hasher = hmac.new(self.secret.encode(), to_sign.encode('UTF-8'), digestmod=sha256)
         signature = "{id}:{hash}".format(id=self.receiver_id,
             hash=hasher.hexdigest())
 
