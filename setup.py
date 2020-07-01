@@ -6,7 +6,7 @@ def readme():
         return f.read()
 
 setup(name='pykhipu',
-    version='0.1.4',
+    version='0.1.5',
     description='Wrapper for the Khipu payment service API v2.0',
     long_description=readme(),
     classifiers=[
