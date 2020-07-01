@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "pykhipu"
+version = "0.1.6"
+description = "Wrapper for the Khipu payment service API v2.0"
+authors = ["Pablo Albornoz <pablo.albornoz.n@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+repository = "http://github.com/fixmycode/pykhipu"
+classifiers=[
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3.4",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Environment :: Console",
+]
+
+[tool.poetry.dependencies]
+python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+requests = "^2.24.0"
+python-dateutil = "^2.8.1"
+six = "^1.15.0"
+
+[tool.poetry.dev-dependencies]
+nose = "^1.3.7"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
