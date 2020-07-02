@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 import requests
 import hmac
+if sys.version_info.major < 3 or sys.version_info.minor < 9:
+    from importlib_metadata import version
+else:
+    from importlib.metadata import version
 from hashlib import sha256
 from six.moves.urllib.parse import urlencode, quote
 #from urllib.parse import urlencode, quote
@@ -96,7 +101,7 @@ class Client(object):
             'headers': {
                 'Authorization': signature,
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'User-Agent': 'pykhipu/0.1.3',
+                'User-Agent': 'pykhipu/{version}'.format(version=version('pykhipu')),
                 'Accept': 'application/json'
             }
         }
