@@ -102,3 +102,6 @@ pip-selfcheck.json
 
 # Rope project settings
 .ropeproject
+
+# VSCode
+.vscode
