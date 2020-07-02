@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import requests
 import hmac
 from hashlib import sha256
@@ -9,24 +10,41 @@ from pykhipu.banks import Banks
 from pykhipu.receivers import Receivers
 
 API_BASE = 'https://khipu.com/api/2.0'
+TRUE_LIST = [True, 'True', 'true', 'TRUE', 1, '1']
+FALSE_LIST = [False, 'False', 'false', 'FALSE', 0, '0']
 
 class Client(object):
     def __init__(self, receiver_id=None, secret=None, debug=False):
-        self._receiver_id = receiver_id
-        self._secret = secret
-        self._debug = debug
+        self.receiver_id = receiver_id
+        self.secret = secret
+        self.is_debug = debug
 
     @property
     def receiver_id(self):
-        return self._receiver_id
+        return self._receiver_id or os.getenv('KHIPU_RECEIVER_ID')
+
+    @receiver_id.setter
+    def receiver_id(self, value):
+        self._receiver_id = value
 
     @property
     def secret(self):
-        return self._secret
+        return self._secret or os.getenv('KHIPU_SECRET')
+
+    @secret.setter
+    def secret(self, value):
+        self._secret = value
 
     @property
     def is_debug(self):
-        return self._debug
+        return self._debug or (os.getenv('KHIPU_DEBUG') in TRUE_LIST)
+
+    @is_debug.setter
+    def is_debug(self, value):
+        self._debug = (
+            value in TRUE_LIST
+            and value not in FALSE_LIST
+        )
 
     @property
     def payments(self):
