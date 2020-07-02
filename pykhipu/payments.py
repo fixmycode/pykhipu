@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from .responses import (
+from pykhipu.responses import (
     PaymentsResponse,
     PaymentsCreateResponse,
     SuccessResponse,

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import requests
 import dateutil.parser
-from .items import BankItem
-from .errors import ValidationError, AuthorizationError, ServiceError
+from pykhipu.items import BankItem
+from pykhipu.errors import ValidationError, AuthorizationError, ServiceError
 
 
 class BaseResponse(object):

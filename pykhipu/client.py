@@ -2,10 +2,11 @@
 import requests
 import hmac
 from hashlib import sha256
-from urllib.parse import urlencode, quote
-from .payments import Payments
-from .banks import Banks
-from .receivers import Receivers
+from six.moves.urllib.parse import urlencode, quote
+#from urllib.parse import urlencode, quote
+from pykhipu.payments import Payments
+from pykhipu.banks import Banks
+from pykhipu.receivers import Receivers
 
 API_BASE = 'https://khipu.com/api/2.0'
 

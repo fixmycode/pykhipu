@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
-from .responses import BanksResponse
+from pykhipu.responses import BanksResponse
 
 
 class Banks(object):

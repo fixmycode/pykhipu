@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import six
-from .items import ErrorItem
+from pykhipu.items import ErrorItem
 
 
 @six.python_2_unicode_compatible
