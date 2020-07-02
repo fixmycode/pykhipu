@@ -3,6 +3,8 @@ PyKhipu
 
 Wrapper for the Khipu payment service API v2.0
 
+.. image:: https://img.shields.io/pypi/v/pykhipu   :alt: PyPI
+
 Installation
 ------------
 
