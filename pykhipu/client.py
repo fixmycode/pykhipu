@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import os
 import sys
 import requests
 import hmac
+import logging
 if sys.version_info.major < 3 or sys.version_info.minor < 9:
     from importlib_metadata import version
 else:
@@ -50,7 +52,7 @@ class Client(object):
             value in TRUE_LIST
             and value not in FALSE_LIST
         )
-
+    
     @property
     def payments(self):
         if not hasattr(self, '_payments'):
@@ -89,8 +91,8 @@ class Client(object):
             hash=hasher.hexdigest())
 
         if self.is_debug:
-            print(u"A firmar: {0}".format(to_sign))
-            print(u"Firma: {0}".format(signature))
+            logging.debug('a firmar: %s', to_sign)
+            logging.debug('firma: %s', signature)
 
         return signature
 
@@ -114,6 +116,6 @@ class Client(object):
         response = requests.request(method, url, **payload)
 
         if self.is_debug:
-            print(u"Response: {0}".format(response.text))
+            logging.debug('Response: %s', response.text)
 
         return response
