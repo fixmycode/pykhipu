@@ -18,15 +18,12 @@ pip install pykhipu
 
 ## Uso
 
-### Interfaz de bajo nivel
-
 Iguala al API de Khipu en llamadas, ideal para portar código o en casos en que se busque más control sobre los resultados.
 
 ```python
 from pykhipu.client import Client
-from pykhipu import currency
 
 client = Client(receiver_id='1234', secret='abcd')
-payment = client.payments.post('test', currency.USD, 100)
+payment = client.payments.post('test', 'USD', 100)
 print(payment.payment_url)
 ```
