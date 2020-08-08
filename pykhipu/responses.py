@@ -24,17 +24,20 @@ class BaseResponse(object):
 
 class PaymentsResponse(BaseResponse):
     def __init__(self, payment_id, payment_url, simplified_transfer_url,
-        transfer_url, app_url, ready_for_terminal, notification_token,
-        receiver_id, conciliation_date, subject, amount, currency, status,
-        status_detail, body, picture_url, receipt_url, return_url, cancel_url,
+        transfer_url, webpay_url, hites_url, payme_url, app_url, ready_for_terminal,
+        notification_token, receiver_id, conciliation_date, subject, amount, currency, 
+        status, status_detail, body, picture_url, receipt_url, return_url, cancel_url,
         notify_url, notify_api_version, expires_date, attachment_urls, bank,
         bank_id, payer_name, payer_email, personal_identifier,
         bank_account_number, out_of_date_conciliation, transaction_id, custom,
-        responsible_user_email, send_reminders, send_email, payment_method):
+        responsible_user_email, send_reminders, send_email, payment_method, funds_source):
         self._payment_id = payment_id
         self._payment_url = payment_url
         self._simplified_transfer_url = simplified_transfer_url
         self._transfer_url = transfer_url
+        self._webpay_url = webpay_url
+        self._hites_url = hites_url
+        self._payme_url = payme_url
         self._app_url = app_url
         self._ready_for_terminal = ready_for_terminal
         self._notification_token = notification_token
@@ -67,6 +70,7 @@ class PaymentsResponse(BaseResponse):
         self._send_reminders = send_reminders
         self._send_email = send_email
         self._payment_method = payment_method
+        self._funds_source = funds_source
 
     @classmethod
     def from_data(cls, data):
@@ -75,6 +79,7 @@ class PaymentsResponse(BaseResponse):
 
         return cls(data.get('payment_id'), data.get('payment_url'),
             data.get('simplified_transfer_url'), data.get('transfer_url'),
+            data.get('webpay_url'), data.get('hites_url'), data.get('payme_url'),
             data.get('app_url'), data.get('ready_for_terminal'),
             data.get('notification_token'), data.get('receiver_id'),
             conciliation_date, data.get('subject'),
@@ -90,7 +95,7 @@ class PaymentsResponse(BaseResponse):
             data.get('out_of_date_conciliation'), data.get('transaction_id'),
             data.get('custom'), data.get('responsible_user_email'),
             data.get('send_reminders'), data.get('send_email'),
-            data.get('payment_method'))
+            data.get('payment_method'), data.get('funds_source'))
 
     @property
     def payment_id(self):
@@ -120,6 +125,27 @@ class PaymentsResponse(BaseResponse):
         URL de pago normal
         """
         return self._transfer_url
+
+    @property
+    def webpay_url(self):
+        """
+        URL de webpay
+        """
+        return self._webpay_url
+
+    @property
+    def hites_url(self):
+        """
+        URL de Hites (no documentada)
+        """
+        return self._hites_url
+
+    @property
+    def payme_url(self):
+        """
+        URL de Payme (no documentada)
+        """
+        return self._payme_url
 
     @property
     def app_url(self):
@@ -356,10 +382,22 @@ class PaymentsResponse(BaseResponse):
         """
         Método de pago usado por el pagador, puede ser 'regular_transfer'
         (transferencia normal), 'simplified_transfer' (transferencia
-        simplificada) o 'not_available' (para un pago marcado como realizado por
-        otro medio por el cobrador).
+        simplificada), 'webpay_psp' (Webpay), 'webpay_debit_psp' (Webpay en
+        botón exclusivo para pago con débito o prepago), 'webpay_crebit_psp'
+        (Webpay en botón exclusivo para pago con crédito) o 'not_available'
+        (para un pago marcado como realizado por otro medio por el cobrador).
         """
         return self._payment_method
+
+    @property
+    def funds_source(self):
+        """
+        Origen de fondos usado por el pagador, puede ser 'debit' para pago con
+        débito, 'prepaid' para pago con prepago, 'credit' para pago con
+        crédito o vacío en el caso de que se haya pagado mediante
+        transferencia bancaria.
+        """
+        return self._funds_source
 
 
 class PaymentsCreateResponse(BaseResponse):
@@ -369,6 +407,9 @@ class PaymentsCreateResponse(BaseResponse):
         self._payment_url = payment_url
         self._simplified_transfer_url = simplified_transfer_url
         self._transfer_url = transfer_url
+        self._webpay_url = webpay_url
+        self._hites_url = hites_url
+        self._payme_url = payme_url
         self._app_url = app_url
         self._ready_for_terminal = ready_for_terminal
 
@@ -407,6 +448,27 @@ class PaymentsCreateResponse(BaseResponse):
         URL de pago normal
         """
         return self._transfer_url
+
+    @property
+    def webpay_url(self):
+        """
+        URL de webpay
+        """
+        return self._webpay_url
+
+    @property
+    def hites_url(self):
+        """
+        URL de Hites (no documentada)
+        """
+        return self._hites_url
+
+    @property
+    def payme_url(self):
+        """
+        URL de Payme (no documentada)
+        """
+        return self._payme_url
 
     @property
     def app_url(self):
