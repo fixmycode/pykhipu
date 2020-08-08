@@ -4,7 +4,7 @@ version = "0.1.6"
 description = "Wrapper for the Khipu payment service API v2.0"
 authors = ["Pablo Albornoz <pablo.albornoz.n@gmail.com>"]
 license = "MIT"
-readme = "README.rst"
+readme = "README.md"
 repository = "http://github.com/fixmycode/pykhipu"
 classifiers=[
     "Development Status :: 3 - Alpha",
