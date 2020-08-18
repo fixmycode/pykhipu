@@ -1,17 +1,11 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
 import sys
 import requests
 import hmac
 import logging
-if sys.version_info.major < 3 or sys.version_info.minor < 9:
-    from importlib_metadata import version
-else:
-    from importlib.metadata import version
+from importlib.metadata import version
 from hashlib import sha256
-from six.moves.urllib.parse import urlencode, quote
-#from urllib.parse import urlencode, quote
+from urllib.parse import urlencode, quote
 from pykhipu.payments import Payments
 from pykhipu.banks import Banks
 from pykhipu.receivers import Receivers

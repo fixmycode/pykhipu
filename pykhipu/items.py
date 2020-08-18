@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class BankItem(object):
     def __init__(self, bank_id, name, message, min_amount, bank_type, parent):
         self._bank_id = bank_id

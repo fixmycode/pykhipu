@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-import six
 from pykhipu.items import ErrorItem
 
 
-@six.python_2_unicode_compatible
 class BaseError(Exception):
     def __init__(self, status, message):
         self._status = status

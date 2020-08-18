@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import requests
 from pykhipu.responses import BanksResponse
 

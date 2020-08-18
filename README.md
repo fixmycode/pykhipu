@@ -18,6 +18,17 @@ pip install pykhipu
 
 ## Uso
 
+### Interfaz de alto nivel
+
+Para usar en la mayoría de los casos, permite crear URLs de pago y verificar pagos
+
+```python
+from pykhipu import PyKhipu, currency
+
+khipu = PyKhipu(receiver_id='1234', secret='abcd', currency=currency.CLP)
+url = khipu.pay('test', 100)
+```
+
 ### Interfaz de bajo nivel
 
 Iguala al API de Khipu en llamadas, ideal para portar código o en casos en que se busque más control sobre los resultados.

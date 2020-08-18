@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import requests
 import dateutil.parser
 from pykhipu.items import BankItem
