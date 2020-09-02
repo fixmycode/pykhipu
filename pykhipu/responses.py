@@ -401,7 +401,7 @@ class PaymentsResponse(BaseResponse):
 
 class PaymentsCreateResponse(BaseResponse):
     def __init__(self, payment_id, payment_url, simplified_transfer_url,
-        transfer_url, app_url, ready_for_terminal):
+        transfer_url, webpay_url, hites_url, payme_url, app_url, ready_for_terminal):
         self._payment_id = payment_id
         self._payment_url = payment_url
         self._simplified_transfer_url = simplified_transfer_url
@@ -416,6 +416,7 @@ class PaymentsCreateResponse(BaseResponse):
     def from_data(cls, data):
         return cls(data.get('payment_id'), data.get('payment_url'),
             data.get('simplified_transfer_url'), data.get('transfer_url'),
+            data.get('webpay_url'), data.get('hites_url'), data.get('payme_url'),
             data.get('app_url'), data.get('ready_for_terminal'))
 
     @property
