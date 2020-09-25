@@ -74,7 +74,9 @@ class PaymentsResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        conciliation_date = dateutil.parser.parse(data.get('conciliation_date'))
+        conciliation_date = data.get('conciliation_date')
+        if conciliation_date:
+            conciliation_date = dateutil.parser.parse(conciliation_date)
         expires_date = dateutil.parser.parse(data.get('expires_date'))
 
         return cls(data.get('payment_id'), data.get('payment_url'),

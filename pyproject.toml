@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pykhipu"
-version = "0.1.7"
+version = "0.1.8"
 description = "Wrapper for the Khipu payment service API v2.0"
 authors = ["Pablo Albornoz <pablo.albornoz.n@gmail.com>"]
 license = "MIT"
