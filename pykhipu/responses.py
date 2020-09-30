@@ -536,7 +536,7 @@ class SuccessResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        return cls(data['message'])
+        return cls(data.get('message'))
 
     @property
     def message(self):
